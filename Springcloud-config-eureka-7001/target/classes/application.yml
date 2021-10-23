@@ -1,0 +1,17 @@
+server:
+  port: 7001
+
+spring:
+  application:
+    name: springcloud-eureka-server
+
+eureka:
+  instance:
+    hostname: localhost
+  server:
+#    enable-self-preservation: false    #禁用自我保护机制
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
