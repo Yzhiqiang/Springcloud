@@ -7,10 +7,10 @@
         insert into dept(dname, db_source) values(#{dname}, DATABASE());
     </insert>
     <select id="queryById" resultType="Dept" parameterType="Long">
-        select * from db1.dept where deptno=#{deptno};
+        select * from dept where deptno=#{deptno};
     </select>
 
     <select id="queryAll" resultType="Dept">
-        select * from db1.dept;
+        select * from dept;
     </select>
 </mapper>

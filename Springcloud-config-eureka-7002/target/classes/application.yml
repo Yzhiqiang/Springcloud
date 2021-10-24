@@ -1,0 +1,17 @@
+server:
+  port: 7002
+
+spring:
+  application:
+    name: springcloud-eureka-server
+
+eureka:
+  instance:
+    hostname: eureka7002.com
+  server:
+#    enable-self-preservation: false    #禁用自我保护机制
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/

@@ -1,10 +1,9 @@
-package com.yu.controller;
+package com.yu.springcloud.controller;
 
 import com.yu.pojo.Dept;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -25,7 +24,10 @@ public class DeptConsumerController {
     @Autowired
     private RestTemplate restTemplate;      //提高多种便捷访问http服务的方法，简单的Restful服务模板
 
-    private static final String REST_URL_PREFIX="http://localhost:8001";
+
+    //Ribbon， 我们这里的地址，应该是一个变量，通过服务器名来访问
+//    private static final String REST_URL_PREFIX="http://localhost:8001";
+    private static final String REST_URL_PREFIX="http://SPRINGCLOUD-PROVIDER-DEPT";
 
     @RequestMapping("/add")
     public boolean add(Dept dept)
