@@ -14,6 +14,10 @@ import java.util.concurrent.ThreadLocalRandom;
  * @Modified By:
  */
 public class OwnRandomRule extends AbstractLoadBalancerRule {
+
+    private int total = 0;
+    private int currentIndex = 0;
+
     public OwnRandomRule() {
     }
 
@@ -29,15 +33,29 @@ public class OwnRandomRule extends AbstractLoadBalancerRule {
                     return null;
                 }
 
-                List<Server> upList = lb.getReachableServers();
-                List<Server> allList = lb.getAllServers();
+                List<Server> upList = lb.getReachableServers();   //获得活着的服务
+                List<Server> allList = lb.getAllServers();    //获得全部服务
                 int serverCount = allList.size();
                 if (serverCount == 0) {
                     return null;
                 }
 
-                int index = this.chooseRandomInt(serverCount);
-                server = (Server)upList.get(index);
+//                int index = this.chooseRandomInt(serverCount);    //生成区间随机数
+//                server = (Server)upList.get(index);    //从活着的服务中，随机获取一个
+
+                if(total < 5)
+                {
+                    server = upList.get(currentIndex);
+                    total++;
+                }else
+                {
+                    total = 0;
+                    currentIndex++;
+                    if(currentIndex > upList.size() - 1) currentIndex = 0;
+                    server = upList.get(currentIndex);
+                }
+
+
                 if (server == null) {
                     Thread.yield();
                 } else {

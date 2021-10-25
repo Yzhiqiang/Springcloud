@@ -2,6 +2,7 @@ package com.yu.myrule;
 
 import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.RandomRule;
+import com.netflix.loadbalancer.RoundRobinRule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,7 +21,7 @@ public class OwnRule {
 
     @Bean
     public IRule myRule() {
-        return new RandomRule();//使用随机策略
+        return new RoundRobinRule();//使用随机策略
         //return new RoundRobinRule();//使用轮询策略
         //return new AvailabilityFilteringRule();//使用轮询策略
         //return new RetryRule();//使用轮询策略
