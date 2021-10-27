@@ -1,0 +1,23 @@
+server:
+  port: 9527
+spring:
+  application:
+    name: springcloud-zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/, http://eureka7002.com:7002/eureka/
+    instance:
+      instance-id: zuul9527.com
+      prefer-id-addres: true
+
+info:
+  app.name: DAI
+  company.name: yuzhiqiangCompany
+
+zuul:
+  routes:
+    mydept.serviceId: springcloud-provider-dept
+    mydept.path: /mydept/**
+  ignored-services: springcloud-provider-dept      #不能再使用这个路径访问， “*”   隐藏全部的服务信息
+  prefix: /yu

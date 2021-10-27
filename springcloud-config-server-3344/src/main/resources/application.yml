@@ -1,0 +1,20 @@
+server:
+  port: 3344
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/Yu-zhiqiang123/test.git
+
+#通过config-server可以连接
+  # http://127.0.0.1:3344/application-dev.yml
+  #http://127.0.0.1:3344/master/config-client-dev.yml
+
+  # /{application}/{profile}[/{label}]
+  # /{application}-{profile}.yml
+  # /{label}/{application}-{profile}.yml
+  # /{application}-{profile}.properties
+  # /{label}/{application}-{profile}.properties
