@@ -32,9 +32,6 @@ public class DeptController {
     public Dept get(@PathVariable("id") Long id)
     {
         Dept dept = deptService.queryById(id);
-        if(dept == null){                         //发现异常后，走熔断机制
-            throw new RuntimeException("id=>"+id+".不存在该用户，或者信息无法找到");
-        }
         return dept;
     }
 

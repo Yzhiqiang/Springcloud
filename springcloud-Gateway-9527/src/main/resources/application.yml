@@ -1,0 +1,38 @@
+server:
+  port: 9527
+spring:
+  application:
+    name: springcloud-Gateway
+  cloud:
+    gateway:
+      routes:
+        - id: shop-product            # 路由的唯一标识                   #路由的ID，没有固定规则，但是要求唯一，建议配合服务名
+#          uri: http://localhost:8001
+          uri: lb://SPRINGCLOUD-PROVIDER-DEPT
+          predicates:
+            - Path=/dept/get/**
+#            - After=2021-10-29T21:21:18.277+08:00[Asia/Shanghai]
+#            - Cookie=username,zzyy
+
+        - id: shop-product2            # 路由的唯一标识
+#          uri: http://localhost:8001            #路由的地址
+          uri: lb://SPRINGCLOUD-PROVIDER-DEPT
+          predicates:                            #断言8001下面有一个这样的地址
+            - Path=/dept/list/**
+      discovery:
+        locator:
+          enabled: true           #开启从注册中心动态创建路由的功能，利用微服务名进行路由
+
+eureka:
+  client:
+    service-url:
+      register-with-eureka: true
+      fetch_registry: true
+      defaultZone: http://eureka7001.com:7001/eureka/
+  instance:
+    instance-id: Gateway9527.com
+    prefer-id-addres: true
+
+info:
+  app.name: DAI
+  company.name: yuzhiqiangCompany

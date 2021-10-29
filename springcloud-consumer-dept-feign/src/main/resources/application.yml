@@ -13,3 +13,15 @@ eureka:
 feign:
   hystrix:
     enabled: true
+
+
+
+#feign客户端默认等待1s，如果服务端的服务大于1s，则需要修改超时时间，否则会报错
+ribbon:
+  ReadTimeout: 5000  #指的是建立连接所用的时间，适用于网络状况正常的情况下，两端连接所用的时间
+  ConnectTimeout: 5000  #指的是建立连接后从服务器读取到可用资源所用的时间。
+
+
+logging:      #feign 日志
+  level:
+    com.yu.service.DeptClientService: debug

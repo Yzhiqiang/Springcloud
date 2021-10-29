@@ -21,6 +21,7 @@
         <module name="springcloud-provider-dept-hystrix-8001" />
         <module name="springcloud-api" />
         <module name="springcloud-Zuul-9527" />
+        <module name="springcloud-Gateway-9527" />
         <module name="springcloud-consumer-hystrix-dashboard" />
         <module name="springcloud-config-server-3344" />
       </profile>

@@ -1,5 +1,6 @@
 package com.yu.service.Impl;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.yu.dao.DeptDao;
 import com.yu.pojo.Dept;
 import com.yu.service.DeptService;
@@ -23,9 +24,20 @@ public class DeptServiceImpl implements DeptService {
         return deptDao.addDept(dept);
     }
 
+    @HystrixCommand(fallbackMethod = "Fallback")
     @Override
     public Dept queryById(long id) {
-        return deptDao.queryById(id);
+        Dept dept = deptDao.queryById(id);
+        if(dept == null)
+        {
+            throw new RuntimeException("id=>"+id+".不存在该用户，或者信息无法找到");
+        }
+        return dept;
+    }
+
+    public Dept Fallback(long id) {
+        Dept dept = new Dept("无此用户","数据库中查寻不到该用户");
+        return dept;
     }
 
     @Override
